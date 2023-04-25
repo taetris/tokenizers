@@ -35,18 +35,18 @@ def indexer(dict_list):
 
 # Search for a term in a specific field
 def search(term):
-    # found_list = {}
+    found_list = []
     for field in ['subject', 'content', 'footnote']:
         
         if index[field][term]:
             print(f"FOund at {index[field][term]}")
-            [print(data[int(num.split('.')[0])]['content']) for i, num in enumerate(index[field][term])]
-            # found_list[field] = (index[field][term])
-    # return found_list
-    return index[field][term]
+            [found_list.append(data[int(num.split('.')[0])]) for i, num in enumerate(index[field][term])]
+            # found_set[i] = (index[field][term])
+    return found_list
+    # return index[field][term]
 
 index = indexer(data)
 # print(index)
-search('Benjamin')
+print(search('text'))
 
 # print('Benjami' in index['subject'])
