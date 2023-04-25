@@ -37,8 +37,8 @@ def indexer(dict_list):
 def search(term, field):
     return index[field][term]
 
-# index = indexer(data)
-# print(index)
-# print(search('Some', 'footnote'))
+index = indexer(data)
+print(index)
+print(search('Some', 'footnote'))
 
-
+print('Benjami' in index['subject'])
