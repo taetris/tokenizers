@@ -4,12 +4,12 @@ data = [
     {
         'subject': 'Frankenstein', 
         'content': 'This is my name.',
-        'footnote': 'Some text'
+        'footnote': 'Some text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus magna id eleifend bibendum. Curabitur at orci dui. Aenean dapibus enim sit amet enim posuere, blandit egestas mi rutrum. Phasellus suscipit consequat sodales. Vivamus vulputate porta est quis consequat. Sed aliquet sodales nibh, nec mattis eros fermentum at. Quisque et mauris nec purus iaculis porta. Maecenas euismod enim sed lobortis gravida.'
     },
     {
         'subject': 'Benjamin Button',
         'content': 'That is your name.',
-        'footnote': 'Some more text. and Some more text here'
+        'footnote': 'Some more text. and Some more text hereInteger et dignissim velit. Sed quis viverra nunc. Curabitur id pellentesque lectus metus, non commodo nisi imperdiet at. Nulla sed justo ex. Maecenas pulvinar libero eu purus rutrum, vitae varius lorem pharetra. Nunc at semper justo. Aliquam erat volutpat. Proin suscipit turpis eget velit ultrices tempor. Maecenas blandit risus id justo auctor interdum.'
     }
 ]
 
@@ -19,7 +19,7 @@ def create_index(blocks):
         sent_list = sents.split(".")
         for lineidx, sent in enumerate( sent_list):
             word_list = sent.split(" ")
-            [field_dict[word].add(f"{lineidx}") for word in word_list]
+            [field_dict[word].add(f"{blkidx}.{lineidx}") for word in word_list]
 
     return field_dict
 
@@ -34,11 +34,19 @@ def indexer(dict_list):
     return index
 
 # Search for a term in a specific field
-def search(term, field):
+def search(term):
+    # found_list = {}
+    for field in ['subject', 'content', 'footnote']:
+        
+        if index[field][term]:
+            print(f"FOund at {index[field][term]}")
+            [print(data[int(num.split('.')[0])]['content']) for i, num in enumerate(index[field][term])]
+            # found_list[field] = (index[field][term])
+    # return found_list
     return index[field][term]
 
 index = indexer(data)
-print(index)
-print(search('Some', 'footnote'))
+# print(index)
+search('Benjamin')
 
-print('Benjami' in index['subject'])
+# print('Benjami' in index['subject'])
